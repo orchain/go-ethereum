@@ -1,0 +1,65 @@
+{
+    "ZeroSigTransaction" : {
+        "_info" : {
+            "comment" : "",
+            "filling-rpc-server" : "evm version 1.11.4-unstable-564db9a9-20230310",
+            "filling-tool-version" : "retesteth-0.3.0-shanghai+commit.324bcf39.Linux.g++",
+            "generatedTestHash" : "e211db7b38bd5b1ed83ea23e0ae14ae3821cc1b3b8ea470259ba2be89e9e581e",
+            "lllcversion" : "Version: 0.5.14-develop.2022.7.30+commit.a096d7a9.Linux.g++",
+            "solidity" : "Version: 0.8.17+commit.8df45f5f.Linux.g++",
+            "source" : "src/TransactionTestsFiller/ttSignature/ZeroSigTransactionFiller.json",
+            "sourceHash" : "83fa9e486b0d5e0d11e97e594c09d59786ee2a04b15c709fea99c87990a0538a"
+        },
+        "result" : {
+            "Berlin" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "Byzantium" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "Constantinople" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "ConstantinopleFix" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP150" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP158" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "Frontier" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "Homestead" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "Istanbul" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "London" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "Merge" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "Shanghai" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            }
+        },
+        "txbytes" : "0xdf030182c73894b94f5374fce5edbc8e2a8697c15331677e6ebf0b0a80808080"
+    }
+}

@@ -1,0 +1,438 @@
+# List of test vectors ids that can be found in tests
+## Withdrawals tests EIP-4895
+
+- ID: **BSHA0001** check that Shanghai block rejected before transition
+- ID: **BSHA0002** check that Merge block rejected after transition
+- ID: **BSHA0003** check that Block without withdrawals root header field but with withdrawals in the body gets rejected after transition
+- ID: **BSHA0004** check that if withdrawals root does not match the withdrawals body block rejected
+- ID: **BSHA0005** check that Shanghai block without withdrawals rlp body is rejected as incomplete
+- ID: **BSHA0006** check if withdrawals rlp body is not presented as List
+
+### Withdrawals elements bounds
+- ID: **BSHB0001** withdrawals index is 2^64-1
+- ID: **BSHB0002** withdrawals index is 2^64
+- ID: **BSHB0003** withdrawals index is bigint
+- ID: **BSHB0004** withdrawals validatorIndex 2^64-1
+- ID: **BSHB0005** withdrawals validatorIndex 2^64
+- ID: **BSHB0006** withdrawals validatorIndex bigint
+- ID: **BSHB0007** withdrawals address is 0x0000..00
+- ID: **BSHB0008** withdrawals address is less than 20 bytes
+- ID: **BSHB0009** withdrawals address is more than 20 bytes
+- ID: **BSHB0010** withdrawals amount 0 is fine
+- ID: **BSHB0011** withdrawals amount more 2^256 is bad
+- ID: **BSHB0012** withdrawals amount more 2^64 is ok
+- ID: **BSHB0013** withdrawals body has more than 4 elements
+- ID: **BSHB0014** withdrawals body has less than 4 elements
+- ID: **BSHB0015** two withdrawals record with the same index  (WARNING: ALLOWED)
+- ID: **BSHB0016** different validators withdraw to the same address
+- ID: **BSHB0017** withdrawal amount is 0 (WARNING: touch empty account)
+- ID: **BSHB0018** withdrawal amount is 0, plus transaction
+- ID: **BSHB0019** withdrawal happens to account that suicide in the same block
+- ID: **BSHB0020** withdrawal happens to account that receive funds in the same block
+- ID: **BSHB0021** check the balance instruction on withdrawal received account before block fin
+- ID: **BSHB0022** withdrawal receiving account trys to send value before block fin
+- ID: **BSHB0023,b** account suicide, then receive funds, then receive withdrawal
+- ID: **BSHB0024,b** account created, then reverted, then receive withdrawals
+- ID: **BSHB0025** check staticcall is fine with withdrawals
+- ID: **BSHB0026** check operations gasprice with withdrawals context
+
+
+## EOF1 contracts
+
+### Invalid examples
+
+- ID: **EOF1I0001** check that EOF1 with a bad magic number fails
+- ID: **EOF1I0002** check that EOF1 with a bad version number fails
+- ID: **EOF1I0003** check that EOF1 with a bad section order fails
+- ID: **EOF1I0004** check that EOF1 missing a section fails
+- ID: **EOF1I0005** check that EOF1 with a bad end of sections number fails
+- ID: **EOF1I0006** check that EOF1 with too many or too few bytes fails
+- ID: **EOF1I0007** check that EOF1 with a malformed code section fails
+- ID: **EOF1I0008** check that EOF1 with an illegal opcode fails
+- ID: **EOF1I0009** check that EOF1 with the wrong maxStackDepth fails
+- ID: **EOF1I0010** check that return values are not allowed on section 0
+- ID: **EOF1I0011** check that function calls to code sections that don't exist fail
+- ID: **EOF1I0012** check that code sections that cause stack underflow fail
+- ID: **EOF1I0013** check that we can't return more values than we declare
+- ID: **EOF1I0014** check that code that looks deeper in the stack than the parameters fails
+- ID: **EOF1I0015** check that code that uses removed opcodes fails
+- ID: **EOF1I0016** check that code that uses new relative jumps to outside the section fails
+- ID: **EOF1I0017** check that parameters are not allowed on section 0
+- ID: **EOF1I0018** inconsistent number of code sections (between types and code)
+- ID: **EOF1I0019** check that jumps into the middle on an opcode are not allowed
+- ID: **EOF1I0020** check that you can't get to the same opcode with two different stack heights
+- ID: **EOF1I0021** empty jump table
+- ID: **EOF1I0022** stack underflow caused by a function call
+- ID: **EOF1I0023** sections with unreachable code fail
+- ID: **EOF1I0024** sections that end with a non-terminator opcode fail
+- ID: **EOF1I0025** data stack height of 1024 is invalid
+- ID: **EOF1I4200_0001**: EOF code containing truncated RJUMP
+- ID: **EOF1I4200_0002**: EOF code containing truncated RJUMP
+- ID: **EOF1I4200_0003**: EOF code containing RJUMP with target outside code bounds (Jumping into header)
+- ID: **EOF1I4200_0004**: EOF code containing RJUMP with target outside code bounds (Jumping before code begin)
+- ID: **EOF1I4200_0005**: EOF code containing RJUMP with target outside code bounds (Jumping into data section)
+- ID: **EOF1I4200_0006**: EOF code containing RJUMP with target outside code bounds (Jumping after code end)
+- ID: **EOF1I4200_0007**: EOF code containing RJUMP with target outside code bounds (Jumping to code end)
+- ID: **EOF1I4200_0008**: EOF code containing RJUMP with target self RJUMP immediate
+- ID: **EOF1I4200_0009**: EOF code containing RJUMP with target other RJUMP immediate
+- ID: **EOF1I4200_0010**: EOF code containing RJUMP with target RJUMPI immediate
+- ID: **EOF1I4200_0011**: EOF code containing RJUMP with target PUSH immediate
+- ID: **EOF1I4200_0012**: EOF code containing RJUMP with target RJUMPV immediate
+- ID: **EOF1I4200_0013**: EOF code containing RJUMP with target CALLF immediate
+- ID: **EOF1I4200_0014**: EOF code containing truncated RJUMPI
+- ID: **EOF1I4200_0015**: EOF code containing truncated RJUMPI
+- ID: **EOF1I4200_0016**: EOF code containing RJUMPI with target outside code bounds (Jumping into header)
+- ID: **EOF1I4200_0017**: EOF code containing RJUMPI with target outside code bounds (Jumping to before code begin)
+- ID: **EOF1I4200_0018**: EOF code containing RJUMPI with target outside code bounds (Jumping into data section)
+- ID: **EOF1I4200_0019**: EOF code containing RJUMPI with target outside code bounds (Jumping to after code end)
+- ID: **EOF1I4200_0020**: EOF code containing RJUMPI with target outside code bounds (Jumping to code end)
+- ID: **EOF1I4200_0021**: EOF code containing RJUMPI with target same RJUMPI immediate
+- ID: **EOF1I4200_0022**: EOF code containing RJUMPI with target other RJUMPI immediate
+- ID: **EOF1I4200_0023**: EOF code containing RJUMPI with target RJUMP immediate
+- ID: **EOF1I4200_0024**: EOF code containing RJUMPI with target PUSH immediate
+- ID: **EOF1I4200_0025**: EOF code containing RJUMPI with target RJUMPV immediate
+- ID: **EOF1I4200_0026**: EOF code containing RJUMPI with target CALLF immediate
+- ID: **EOF1I4200_0027**: EOF code containing RJUMPV with count 0 and zero immediates
+- ID: **EOF1I4200_0028**: EOF code containing RJUMPV with count 0 and one immediates
+- ID: **EOF1I4200_0029**: EOF code containing truncated RJUMPV
+- ID: **EOF1I4200_0030**: EOF code containing truncated RJUMPV
+- ID: **EOF1I4200_0031**: EOF code containing truncated RJUMPV
+- ID: **EOF1I4200_0032**: EOF code containing RJUMPV with target outside code bounds (Jumping into header)
+- ID: **EOF1I4200_0033**: EOF code containing RJUMPV with target outside code bounds (Jumping to before code begin)
+- ID: **EOF1I4200_0034**: EOF code containing RJUMPV with target outside code bounds (Jumping into data section)
+- ID: **EOF1I4200_0035**: EOF code containing RJUMPV with target outside code bounds (Jumping to after code end)
+- ID: **EOF1I4200_0036**: EOF code containing RJUMPV with target outside code bounds (Jumping to code end)
+- ID: **EOF1I4200_0037**: EOF code containing RJUMPV with target same RJUMPV immediate
+- ID: **EOF1I4200_0038**: EOF code containing RJUMPV with target RJUMP immediate
+- ID: **EOF1I4200_0039**: EOF code containing RJUMPV with target RJUMPI immediate
+- ID: **EOF1I4200_0040**: EOF code containing RJUMPV with target PUSH immediate
+- ID: **EOF1I4200_0041**: EOF code containing RJUMPV with target other RJUMPV immediate
+- ID: **EOF1I4200_0042**: EOF code containing RJUMPV with target CALLF immediate
+- ID: **EOF1I4750_0001**: EOF code missing mandatory type section
+- ID: **EOF1I4750_0002**: EOF code containing multiple type headers
+- ID: **EOF1I4750_0003**: EOF code containing type section size (Size 1)
+- ID: **EOF1I4750_0004**: EOF code containing type section size (Size 8 - 1 Code section)
+- ID: **EOF1I4750_0005**: EOF code containing type section size (Size 8 - 3 Code sections)
+- ID: **EOF1I4750_0006**: EOF code containing invalid section type (1,0) (First section having a type different than (0,0))
+- ID: **EOF1I4750_0007**: EOF code containing invalid section type (0,1) (First section having a type different than (0,0))
+- ID: **EOF1I4750_0008**: EOF code containing invalid section type (2,3) (First section having a type different than (0,0))
+- ID: **EOF1V4750_0011**: EOF code containing too many code sections
+- ID: **EOF1I4750_0009**: EOF code containing CALLF to a non existing code section
+- ID: **EOF1I4750_0010**: EOF code containing truncated CALLF
+- ID: **EOF1I4750_0011**: EOF code containing deprecated instruction (JUMP)
+- ID: **EOF1I4750_0012**: EOF code containing deprecated instruction (JUMPI)
+- ID: **EOF1I4750_0013**: EOF code containing deprecated instruction (PC)
+- ID: **EOF1I4750_0014**: EOF code containing call to functions without required stack specified in type section
+- ID: **EOF1I4750_0015**: EOF code containing call to functions without required stack NOT specified in type section
+- ID: **EOF1I4750_0016**: EOF code containing function trying to return more items than specified in type section
+- ID: **EOF1I4750_0017**: EOF code containing function exceeding max stack items
+- ID: **EOF1I4750_0018**: EOF code containing function which max stack height causes to exceed max stack items (stack overflow)
+- ID: **EOF1I5450_0001** Stack height mismatch for different paths (a)
+- ID: **EOF1I5450_0002** Stack height mismatch for different paths (b)
+- ID: **EOF1I5450_0003** Calls returning different number of outputs
+- ID: **EOF1I5450_0004** Pushing loop
+- ID: **EOF1I5450_0005** Popping loop
+- ID: **EOF1I5450_0006** Jump table with different stack heights
+- ID: **EOF1I5450_0007** Stack underflow for opcode ADD
+- ID: **EOF1I5450_0008** Stack underflow for opcode MUL
+- ID: **EOF1I5450_0009** Stack underflow for opcode SUB
+- ID: **EOF1I5450_0010** Stack underflow for opcode DIV
+- ID: **EOF1I5450_0011** Stack underflow for opcode SDIV
+- ID: **EOF1I5450_0012** Stack underflow for opcode MOD
+- ID: **EOF1I5450_0013** Stack underflow for opcode SMOD
+- ID: **EOF1I5450_0014** Stack underflow for opcode ADDMOD
+- ID: **EOF1I5450_0015** Stack underflow for opcode MULMOD
+- ID: **EOF1I5450_0016** Stack underflow for opcode EXP
+- ID: **EOF1I5450_0017** Stack underflow for opcode SIGNEXTEND
+- ID: **EOF1I5450_0018** Stack underflow for opcode LT
+- ID: **EOF1I5450_0019** Stack underflow for opcode GT
+- ID: **EOF1I5450_0020** Stack underflow for opcode SLT
+- ID: **EOF1I5450_0021** Stack underflow for opcode SGT
+- ID: **EOF1I5450_0022** Stack underflow for opcode EQ
+- ID: **EOF1I5450_0023** Stack underflow for opcode ISZERO
+- ID: **EOF1I5450_0024** Stack underflow for opcode AND
+- ID: **EOF1I5450_0025** Stack underflow for opcode OR
+- ID: **EOF1I5450_0026** Stack underflow for opcode XOR
+- ID: **EOF1I5450_0027** Stack underflow for opcode NOT
+- ID: **EOF1I5450_0028** Stack underflow for opcode BYTE
+- ID: **EOF1I5450_0029** Stack underflow for opcode SHL
+- ID: **EOF1I5450_0030** Stack underflow for opcode SHR
+- ID: **EOF1I5450_0031** Stack underflow for opcode SAR
+- ID: **EOF1I5450_0032** Stack underflow for opcode SHA3
+- ID: **EOF1I5450_0033** Stack underflow for opcode BALANCE
+- ID: **EOF1I5450_0034** Stack underflow for opcode CALLDATALOAD
+- ID: **EOF1I5450_0035** Stack underflow for opcode CALLDATACOPY
+- ID: **EOF1I5450_0036** Stack underflow for opcode CODECOPY
+- ID: **EOF1I5450_0037** Stack underflow for opcode EXTCODESIZE
+- ID: **EOF1I5450_0038** Stack underflow for opcode EXTCODECOPY
+- ID: **EOF1I5450_0039** Stack underflow for opcode RETURNDATACOPY
+- ID: **EOF1I5450_0040** Stack underflow for opcode EXTCODEHASH
+- ID: **EOF1I5450_0041** Stack underflow for opcode BLOCKHASH
+- ID: **EOF1I5450_0042** Stack underflow for opcode POP
+- ID: **EOF1I5450_0043** Stack underflow for opcode MLOAD
+- ID: **EOF1I5450_0044** Stack underflow for opcode MSTORE
+- ID: **EOF1I5450_0045** Stack underflow for opcode MSTORE8
+- ID: **EOF1I5450_0046** Stack underflow for opcode SLOAD
+- ID: **EOF1I5450_0047** Stack underflow for opcode SSTORE
+- ID: **EOF1I5450_0048** Stack underflow for opcode DUP1
+- ID: **EOF1I5450_0049** Stack underflow for opcode DUP2
+- ID: **EOF1I5450_0050** Stack underflow for opcode DUP3
+- ID: **EOF1I5450_0051** Stack underflow for opcode DUP4
+- ID: **EOF1I5450_0052** Stack underflow for opcode DUP5
+- ID: **EOF1I5450_0053** Stack underflow for opcode DUP6
+- ID: **EOF1I5450_0054** Stack underflow for opcode DUP7
+- ID: **EOF1I5450_0055** Stack underflow for opcode DUP8
+- ID: **EOF1I5450_0056** Stack underflow for opcode DUP9
+- ID: **EOF1I5450_0057** Stack underflow for opcode DUP10
+- ID: **EOF1I5450_0058** Stack underflow for opcode DUP11
+- ID: **EOF1I5450_0059** Stack underflow for opcode DUP12
+- ID: **EOF1I5450_0060** Stack underflow for opcode DUP13
+- ID: **EOF1I5450_0061** Stack underflow for opcode DUP14
+- ID: **EOF1I5450_0062** Stack underflow for opcode DUP15
+- ID: **EOF1I5450_0063** Stack underflow for opcode DUP16
+- ID: **EOF1I5450_0064** Stack underflow for opcode SWAP1
+- ID: **EOF1I5450_0065** Stack underflow for opcode SWAP2
+- ID: **EOF1I5450_0066** Stack underflow for opcode SWAP3
+- ID: **EOF1I5450_0067** Stack underflow for opcode SWAP4
+- ID: **EOF1I5450_0068** Stack underflow for opcode SWAP5
+- ID: **EOF1I5450_0069** Stack underflow for opcode SWAP6
+- ID: **EOF1I5450_0070** Stack underflow for opcode SWAP7
+- ID: **EOF1I5450_0071** Stack underflow for opcode SWAP8
+- ID: **EOF1I5450_0072** Stack underflow for opcode SWAP9
+- ID: **EOF1I5450_0073** Stack underflow for opcode SWAP10
+- ID: **EOF1I5450_0074** Stack underflow for opcode SWAP11
+- ID: **EOF1I5450_0075** Stack underflow for opcode SWAP12
+- ID: **EOF1I5450_0076** Stack underflow for opcode SWAP13
+- ID: **EOF1I5450_0077** Stack underflow for opcode SWAP14
+- ID: **EOF1I5450_0078** Stack underflow for opcode SWAP15
+- ID: **EOF1I5450_0079** Stack underflow for opcode SWAP16
+- ID: **EOF1I5450_0080** Stack underflow for opcode LOG0
+- ID: **EOF1I5450_0081** Stack underflow for opcode LOG1
+- ID: **EOF1I5450_0082** Stack underflow for opcode LOG2
+- ID: **EOF1I5450_0083** Stack underflow for opcode LOG3
+- ID: **EOF1I5450_0084** Stack underflow for opcode LOG4
+- ID: **EOF1I5450_0085** Stack underflow for opcode CREATE
+- ID: **EOF1I5450_0086** Stack underflow for opcode CALL
+- ID: **EOF1I5450_0087** Stack underflow for opcode RETURN
+- ID: **EOF1I5450_0088** Stack underflow for opcode DELEGATECALL
+- ID: **EOF1I5450_0089** Stack underflow for opcode CREATE2
+- ID: **EOF1I5450_0090** Stack underflow for opcode STATICCALL
+- ID: **EOF1I5450_0091** Stack underflow for opcode REVERT
+- ID: **EOF1I5450_0092** Calling function without enough stack items: Function 0 calls Function 1 without enough parameters
+- ID: **EOF1I5450_0093** Calling function without enough stack items: Function 1 calls Function 2 with enough parameters
+- ID: **EOF1I5450_0094** Calling function without enough stack items: Function 0 calls Function 1 without enought parameters, Function 1 calls Function 2 without enough parameers
+- ID: **EOF1I5450_0095** Stack Overflow: Function pushing more than 1024 items to the stack
+- ID: **EOF1I5450_0096** Stack Overflow: Function 1 when called by Function 0 pushes more than 1024 items to the stack
+- ID: **EOF1I5450_0097** Function ending with non-terminating instruction (a)
+- ID: **EOF1I5450_0098** Function ending with non-terminating instruction (b)
+- ID: **EOF1I5450_0099** Function ending with non-terminating instruction (c)
+- ID: **EOF1I5450_0100** Function containing unreachable code after RETURN
+- ID: **EOF1I5450_0101** Function containing unreachable code after REVERT
+- ID: **EOF1I5450_0102** Unreachable code after RJUMP
+- ID: **EOF1I5450_0103** Unreachable code after infinite loop
+
+
+### Valid examples
+
+- ID: **EOF1V0001** check that simple valid EOF1 deploys
+- ID: **EOF1V0002** check that valid EOF1 with two code sections deploys
+- ID: **EOF1V0003** check that valid EOF1 with four code sections deploys
+- ID: **EOF1V0004** check that valid EOF1 can include 0xFE, the designated "invalid opcode"
+- ID: **EOF1V0005** check that EOF1 with the right maxStackDepth deploys
+- ID: **EOF1V0006** check that return values are allowed on code sections that aren't zero
+- ID: **EOF1V0007** check that function calls to code sections that exist are allowed
+- ID: **EOF1V0008** check that code that uses a new style relative jump (5C) succeeds
+- ID: **EOF1V0009** check that parameters are allowed on code sections that aren't zero
+- ID: **EOF1V0010** parameters are part of the max stack height
+- ID: **EOF1V0011** check that code that uses a new style conditional jump (5D) succeeds
+- ID: **EOF1V0012** return values on code sections affect maxStackHeight of the caller
+- ID: **EOF1V0013** jump tables work
+- ID: **EOF1V0014** sections that end with a legit terminating opcode are OK
+- ID: **EOF1V0015** data stack height of 1023 is valid
+- ID: **EOF1V4200_0001**: EOF code containing RJUMP (Positive, Negative)
+- ID: **EOF1V4200_0002**: EOF code containing RJUMP (Zero)
+- ID: **EOF1V4200_0003**: EOF code containing RJUMPI (Positive)
+- ID: **EOF1V4200_0004**: EOF code containing RJUMPI (Negative)
+- ID: **EOF1V4200_0005**: EOF code containing RJUMPI (Zero)
+- ID: **EOF1V4200_0006**: EOF with RJUMPV table size 1 (Positive)
+- ID: **EOF1V4200_0007**: EOF with RJUMPV table size 1 (Negative)
+- ID: **EOF1V4200_0008**: EOF with RJUMPV table size 1 (Zero)
+- ID: **EOF1V4200_0009**: EOF with RJUMPV table size 3
+- ID: **EOF1V4200_0010**: EOF with RJUMPV table size 255 (Target 0)
+- ID: **EOF1V4200_0011**: EOF with RJUMPV table size 255 (Target 100)
+- ID: **EOF1V4200_0012**: EOF with RJUMPV table size 255 (Target 254)
+- ID: **EOF1V4200_0013**: EOF with RJUMPV table size 255 (Target 256)
+- ID: **EOF1V4750_0001**: EOF code containing single type section
+- ID: **EOF1V4750_0002**: EOF code containing single type section and data section
+- ID: **EOF1V4750_0003**: EOF code containing multiple type/code sections
+- ID: **EOF1V4750_0004**: EOF code containing multiple type/code sections and data section
+- ID: **EOF1V4750_0005**: EOF code containing multiple type/code sections, no void I/O types
+- ID: **EOF1V4750_0006**: EOF code containing multiple type/code sections, no void I/O types, containing data section
+- ID: **EOF1V4750_0007**: EOF code containing RETF as terminating instruction
+- ID: **EOF1V4750_0008**: EOF code containing RETF as terminating instruction, containing data section
+- ID: **EOF1V4750_0009**: EOF code containing the maximum number of code sections
+- ID: **EOF1V4750_0010**: EOF code containing the maximum number of code sections and data section
+- ID: **EOF1V5450_0001** Code with branches having the same stack height
+- ID: **EOF1V5450_0002** Jump table
+- ID: **EOF1V5450_0003** Infinite loop
+- ID: **EOF1V5450_0004** Infinite loop using RJUMPV
+- ID: **EOF1V5450_0005** CALLF branches with the same total of outputs
+- ID: **EOF1V5450_0006** CALLF inputs
+- ID: **EOF1V5450_0007** Validate input for ADD opcode
+- ID: **EOF1V5450_0008** Validate input for MUL opcode
+- ID: **EOF1V5450_0009** Validate input for SUB opcode
+- ID: **EOF1V5450_0010** Validate input for DIV opcode
+- ID: **EOF1V5450_0011** Validate input for SDIV opcode
+- ID: **EOF1V5450_0012** Validate input for MOD opcode
+- ID: **EOF1V5450_0013** Validate input for SMOD opcode
+- ID: **EOF1V5450_0014** Validate input for ADDMOD opcode
+- ID: **EOF1V5450_0015** Validate input for MULMOD opcode
+- ID: **EOF1V5450_0016** Validate input for EXP opcode
+- ID: **EOF1V5450_0017** Validate input for SIGNEXTEND opcode
+- ID: **EOF1V5450_0018** Validate input for LT opcode
+- ID: **EOF1V5450_0019** Validate input for GT opcode
+- ID: **EOF1V5450_0020** Validate input for SLT opcode
+- ID: **EOF1V5450_0021** Validate input for SGT opcode
+- ID: **EOF1V5450_0022** Validate input for EQ opcode
+- ID: **EOF1V5450_0023** Validate input for ISZERO opcode
+- ID: **EOF1V5450_0024** Validate input for AND opcode
+- ID: **EOF1V5450_0025** Validate input for OR opcode
+- ID: **EOF1V5450_0026** Validate input for XOR opcode
+- ID: **EOF1V5450_0027** Validate input for NOT opcode
+- ID: **EOF1V5450_0028** Validate input for BYTE opcode
+- ID: **EOF1V5450_0029** Validate input for SHL opcode
+- ID: **EOF1V5450_0030** Validate input for SHR opcode
+- ID: **EOF1V5450_0031** Validate input for SAR opcode
+- ID: **EOF1V5450_0032** Validate input for SHA3 opcode
+- ID: **EOF1V5450_0033** Validate input for BALANCE opcode
+- ID: **EOF1V5450_0034** Validate input for CALLDATALOAD opcode
+- ID: **EOF1V5450_0035** Validate input for CALLDATACOPY opcode
+- ID: **EOF1V5450_0036** Validate input for CODECOPY opcode
+- ID: **EOF1V5450_0037** Validate input for EXTCODESIZE opcode
+- ID: **EOF1V5450_0038** Validate input for EXTCODECOPY opcode
+- ID: **EOF1V5450_0039** Validate input for RETURNDATACOPY opcode
+- ID: **EOF1V5450_0040** Validate input for EXTCODEHASH opcode
+- ID: **EOF1V5450_0041** Validate input for BLOCKHASH opcode
+- ID: **EOF1V5450_0042** Validate input for POP opcode
+- ID: **EOF1V5450_0043** Validate input for MLOAD opcode
+- ID: **EOF1V5450_0044** Validate input for MSTORE opcode
+- ID: **EOF1V5450_0045** Validate input for MSTORE8 opcode
+- ID: **EOF1V5450_0046** Validate input for SLOAD opcode
+- ID: **EOF1V5450_0047** Validate input for SSTORE opcode
+- ID: **EOF1V5450_0048** Validate input for DUP1 opcode
+- ID: **EOF1V5450_0049** Validate input for DUP2 opcode
+- ID: **EOF1V5450_0050** Validate input for DUP3 opcode
+- ID: **EOF1V5450_0051** Validate input for DUP4 opcode
+- ID: **EOF1V5450_0052** Validate input for DUP5 opcode
+- ID: **EOF1V5450_0053** Validate input for DUP6 opcode
+- ID: **EOF1V5450_0054** Validate input for DUP7 opcode
+- ID: **EOF1V5450_0055** Validate input for DUP8 opcode
+- ID: **EOF1V5450_0056** Validate input for DUP9 opcode
+- ID: **EOF1V5450_0057** Validate input for DUP10 opcode
+- ID: **EOF1V5450_0058** Validate input for DUP11 opcode
+- ID: **EOF1V5450_0059** Validate input for DUP12 opcode
+- ID: **EOF1V5450_0060** Validate input for DUP13 opcode
+- ID: **EOF1V5450_0061** Validate input for DUP14 opcode
+- ID: **EOF1V5450_0062** Validate input for DUP15 opcode
+- ID: **EOF1V5450_0063** Validate input for DUP16 opcode
+- ID: **EOF1V5450_0064** Validate input for SWAP1 opcode
+- ID: **EOF1V5450_0065** Validate input for SWAP2 opcode
+- ID: **EOF1V5450_0066** Validate input for SWAP3 opcode
+- ID: **EOF1V5450_0067** Validate input for SWAP4 opcode
+- ID: **EOF1V5450_0068** Validate input for SWAP5 opcode
+- ID: **EOF1V5450_0069** Validate input for SWAP6 opcode
+- ID: **EOF1V5450_0070** Validate input for SWAP7 opcode
+- ID: **EOF1V5450_0071** Validate input for SWAP8 opcode
+- ID: **EOF1V5450_0072** Validate input for SWAP9 opcode
+- ID: **EOF1V5450_0073** Validate input for SWAP10 opcode
+- ID: **EOF1V5450_0074** Validate input for SWAP11 opcode
+- ID: **EOF1V5450_0075** Validate input for SWAP12 opcode
+- ID: **EOF1V5450_0076** Validate input for SWAP13 opcode
+- ID: **EOF1V5450_0077** Validate input for SWAP14 opcode
+- ID: **EOF1V5450_0078** Validate input for SWAP15 opcode
+- ID: **EOF1V5450_0079** Validate input for SWAP16 opcode
+- ID: **EOF1V5450_0080** Validate input for LOG0 opcode
+- ID: **EOF1V5450_0081** Validate input for LOG1 opcode
+- ID: **EOF1V5450_0082** Validate input for LOG2 opcode
+- ID: **EOF1V5450_0083** Validate input for LOG3 opcode
+- ID: **EOF1V5450_0084** Validate input for LOG4 opcode
+- ID: **EOF1V5450_0085** Validate input for CREATE opcode
+- ID: **EOF1V5450_0086** Validate input for CALL opcode
+- ID: **EOF1V5450_0087** Validate input for RETURN opcode
+- ID: **EOF1V5450_0088** Validate input for DELEGATECALL opcode
+- ID: **EOF1V5450_0089** Validate input for CREATE2 opcode
+- ID: **EOF1V5450_0090** Validate input for STATICCALL opcode
+- ID: **EOF1V5450_0091** Validate input for REVERT opcode
+- ID: **EOF1V5450_0092** Containing terminating opcode RETURN at the end
+- ID: **EOF1V5450_0093** Containing terminating opcode REVERT at the end
+- ID: **EOF1V5450_0094** Loop ending with unconditional RJUMP (a)
+- ID: **EOF1V5450_0095** Loop ending with unconditional RJUMP (b)
+- ID: **EOF1V5450_0096** Functions ending with RETF
+- ID: **EOF1V5450_0097** Stack is not required to be empty on terminating instruction RETURN
+- ID: **EOF1V5450_0098** Stack is not required to be empty on terminating instruction REVERT
+- ID: **EOF1V5450_0099** RETF returning maximum number of outputs (127)
+
+
+### Contract creation tests
+
+- ID: **EOF1C0001** legacy contract > CREATE > legacy init code > legacy deploy code
+- ID: **EOF1C0002** legacy contract > CREATE > legacy init code > eof1 deploy code
+- ID: **EOF1C0003** legacy contract > CREATE > eof1 init code > legacy deploy code (fail)
+- ID: **EOF1C0004** legacy contract > CREATE > eof1 init code > eof1 deploy code
+- ID: **EOF1C0005** legacy contract > CREATE2 > legacy init code > legacy deploy code
+- ID: **EOF1C0006** legacy contract > CREATE2 > legacy init code > eof1 deploy code
+- ID: **EOF1C0007** legacy contract > CREATE2 > eof1 init code > legacy deploy code (fail)
+- ID: **EOF1C0008** legacy contract > CREATE2 > eof1 init code > eof1 deploy code
+- ID: **EOF1C0009** eof1 contract > CREATE > legacy init code > legacy deploy code (fail)
+- ID: **EOF1C0010** eof1 contract > CREATE > legacy init code > eof1 deploy code (fail)
+- ID: **EOF1C0011** eof1 contract > CREATE > eof1 init code > legacy deploy code (fail)
+- ID: **EOF1C0012** eof1 contract > CREATE > eof1 init code > eof1 deploy code
+- ID: **EOF1C0013** eof1 contract > CREATE2 > legacy init code > legacy deploy code (fail)
+- ID: **EOF1C0014** eof1 contract > CREATE2 > legacy init code > eof1 deploy code (fail)
+- ID: **EOF1C0015** eof1 contract > CREATE2 > eof1 init code > legacy deploy code (fail)
+- ID: **EOF1C0016** eof1 contract > CREATE2 > eof1 init code > eof1 deploy code
+- ID: **EOF1C0017** legacy contact > CREATE[2] > legacy init code > nonsense
+- ID: **EOF1C0018** legacy contact > CREATE[2] > eof1 init code > nonsense (fail)
+- ID: **EOF1C0019** legacy contact > CREATE[2] > nonsense init code (fail)
+
+
+## Warm COINBASE EIP-3651 
+
+- ID: **WRMCB0001** check EXTCODESIZE gas cost on coinbase
+- ID: **WRMCB0002** check EXTCODECOPY gas cost on coinbase
+- ID: **WRMCB0003** check EXTCODEHASH gas cost on coinbase
+- ID: **WRMCB0004** check BALANCE gas cost on coinbase
+- ID: **WRMCB0005** check CALL gas cost on coinbase
+- ID: **WRMCB0006** check CALLCODE gas cost on coinbase
+- ID: **WRMCB0007** check DELEGATECALL gas cost on coinbase
+- ID: **WRMCB0008** check STATICCALL gas cost on coinbase
+- ID: **WRMCB0009** check OOG CALL on coinbase
+- ID: **WRMCB0010** check OOG CALLCODE on coinbase
+- ID: **WRMCB0011** check OOG DELEGATECALL on coinbase
+- ID: **WRMCB0012** check OOG STATICCALL on coinbase
+
+
+## SELFDESTRUCT and how it affects balances
+- ID: **SUC000** contractA is called to perform suicide to dest1 (3 must immidiately(check that it is immidiately and not by the end of tx) go to dest1)
+- ID: **SUC001** does not suicide, just receive more funds via call. check the balance of contractA (must be 0, the second transfer funds erased)
+- ID: **SUC002** does another suicide to dest1 (so dest1 now have 3 + x)
+- ID: **SUC003** does another suicide to dest2 (so both dest1 and dest2 has some balance)
+- ID: **SUC004** tries to make value transfer but fails because initial suicide 0ed the balance (answering this (check that it is immidiately and not by the end of tx))
+- ID: **SUC005** receives more funds and try to transder it (same as SUC004, but this time work because it received funds via 2nd call)
+- ID: **SUC006** receive funds post-transaction, create a mostly empty address
+- ID: **SUC007.0** Same txn, same addr, different frames. Frame1 CALLs frame2, frame2 SELFDESTRUCTs into an address, and then frame1 SELFDESTRUCTs into another address. Balance ends up where frame2 sent it.
+- ID: **SUC007.1** Same txn, same addr, different frames. Frame1 CALLCODEs frame2, frame2 SELFDESTRUCTs into an address, and then frame1 SELFDESTRUCTs into another address. Balance ends up where frame2 sent it.
+- ID: **SUC007.2** Same txn, same addr, different frames. Frame1 DELEGATECALLs frame2, frame2 SELFDESTRUCTs into an address, and then frame1 SELFDESTRUCTs into another address. Balance ends up where frame2 sent it.
+- ID: **SUC007.3** Same txn, same addr, different frames. Frame1 STATICCALLs frame2, frame2 SELFDESTRUCTs into an address, and then frame1 SELFDESTRUCTs into another address. Balance ends up where frame1 sent it (static frames can't SELFDESTRUCT).
+- ID: **SUC008.0** Same txn, same addr, different frames. Frame1 CALLs frame2, frame2 SELFDESTRUCTs into contract's own ADDR, and then frame1 SELFDESTRUCTs into another address. Balance disappears.
+- ID: **SUC008.1** Same txn, same addr, different frames. Frame1 CALLCODEs frame2, frame2 SELFDESTRUCTs into contract's own ADDR, and then frame1 SELFDESTRUCTs into another address. Balance disappears.
+- ID: **SUC008.2** Same txn, same addr, different frames. Frame1 DELEGATECALLs frame2, frame2 SELFDESTRUCTs into contract's own ADDR, and then frame1 SELFDESTRUCTs into another address. Balance disappears.
+- ID: **SUC008.3** Same txn, same addr, different frames. Frame1 STATICCALLs frame2, frame2 SELFDESTRUCTs into contract's own ADDR, and then frame1 SELFDESTRUCTs into the same address. Balance ends up where frame1 sent it (static frames can't SELFDESTRUCT).
+
+## BLOBHASH EIP4844
+- ID: **BLOB000** empty blobhash list transaction is rejected
+- ID: **BLOB001** blobhash list element with wrong version byte transaction is rejected
+- ID: **BLOB002** blobhash create transaction is rejected
+- ID: **BLOB003** blobhash opcode return out of range
+- ID: **BLOB004** same blobhash in the list
+- ID: **BLOB005** blobhash opcode bounds

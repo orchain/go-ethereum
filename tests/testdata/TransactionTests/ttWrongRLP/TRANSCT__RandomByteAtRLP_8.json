@@ -1,0 +1,65 @@
+{
+    "TRANSCT__RandomByteAtRLP_8" : {
+        "_info" : {
+            "comment" : "",
+            "filling-rpc-server" : "evm version 1.11.4-unstable-564db9a9-20230310",
+            "filling-tool-version" : "retesteth-0.3.0-shanghai+commit.324bcf39.Linux.g++",
+            "generatedTestHash" : "4adc42e0c50af146733e514ea855c9717077fc4987a021e4dff1d53ec8b4639b",
+            "lllcversion" : "Version: 0.5.14-develop.2022.7.30+commit.a096d7a9.Linux.g++",
+            "solidity" : "Version: 0.8.17+commit.8df45f5f.Linux.g++",
+            "source" : "src/TransactionTestsFiller/ttWrongRLP/TRANSCT__RandomByteAtRLP_8Copier.json",
+            "sourceHash" : "09c88205f569ade3f83ef96282584b748d62e1588a81632add60023a057c09de"
+        },
+        "result" : {
+            "Berlin" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "Byzantium" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "Constantinople" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "ConstantinopleFix" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP150" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP158" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "Frontier" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "Homestead" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "Istanbul" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "London" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "Merge" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            },
+            "Shanghai" : {
+                "exception" : "RLP_Error_RLP_Size",
+                "intrinsicGas" : "0x00"
+            }
+        },
+        "txbytes" : "0xf86103018207d094b94f5374fce5edbc8e2a8697c15331677e6ebf0b0a8255441ca098ff921201554726367d2be8c804a7ff89ccf285ebc57dff8ae4c44efb9c19ac4aa08887321be575c8095f789dd4c743dfe42c1820f9231f98a962b210e3ac2452a3"
+    }
+}

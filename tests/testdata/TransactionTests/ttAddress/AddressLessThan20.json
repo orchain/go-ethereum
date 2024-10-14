@@ -1,0 +1,65 @@
+{
+    "AddressLessThan20" : {
+        "_info" : {
+            "comment" : "",
+            "filling-rpc-server" : "evm version 1.11.4-unstable-564db9a9-20230310",
+            "filling-tool-version" : "retesteth-0.3.0-shanghai+commit.324bcf39.Linux.g++",
+            "generatedTestHash" : "8999049edf39a01cf52911a09899990e9b2bce2b4e52fcb4ef90707c90b3ee9a",
+            "lllcversion" : "Version: 0.5.14-develop.2022.7.30+commit.a096d7a9.Linux.g++",
+            "solidity" : "Version: 0.8.17+commit.8df45f5f.Linux.g++",
+            "source" : "src/TransactionTestsFiller/ttAddress/AddressLessThan20Filler.json",
+            "sourceHash" : "3ef2970519a826473e50955d81c1b0cd7d2c0172a01bf080cc08cf3ca21ede65"
+        },
+        "result" : {
+            "Berlin" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "Byzantium" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "Constantinople" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "ConstantinopleFix" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP150" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP158" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "Frontier" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "Homestead" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "Istanbul" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "London" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "Merge" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            },
+            "Shanghai" : {
+                "exception" : "AddressTooShort",
+                "intrinsicGas" : "0x00"
+            }
+        },
+        "txbytes" : "0xf8528001825208870b9331677e6ebf0a801ca098ff921201554726367d2be8c804a7ff89ccf285ebc57dff8ae4c44b9c19ac4aa03887321be575c8095f789dd4c743dfe42c1820f9231f98a962b210e3ac2452a3"
+    }
+}

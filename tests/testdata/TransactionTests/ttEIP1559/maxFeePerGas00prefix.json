@@ -1,0 +1,65 @@
+{
+    "maxFeePerGas00prefix" : {
+        "_info" : {
+            "comment" : "",
+            "filling-rpc-server" : "evm version 1.11.4-unstable-564db9a9-20230310",
+            "filling-tool-version" : "retesteth-0.3.0-shanghai+commit.324bcf39.Linux.g++",
+            "generatedTestHash" : "22d712bffdb9dafc9b71a94b3dc34cad0da4dab78a7b6753ac2d86467f172c6c",
+            "lllcversion" : "Version: 0.5.14-develop.2022.7.30+commit.a096d7a9.Linux.g++",
+            "solidity" : "Version: 0.8.17+commit.8df45f5f.Linux.g++",
+            "source" : "src/TransactionTestsFiller/ttEIP1559/maxFeePerGas00prefixFiller.json",
+            "sourceHash" : "b0023df537a4822fa15263cd276e3bde29c2894d345aa0b24d5f88433226153a"
+        },
+        "result" : {
+            "Berlin" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "Byzantium" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "Constantinople" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "ConstantinopleFix" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP150" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP158" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "Frontier" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "Homestead" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "Istanbul" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "London" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "Merge" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            },
+            "Shanghai" : {
+                "exception" : "1559LeadingZerosBaseFee",
+                "intrinsicGas" : "0x00"
+            }
+        },
+        "txbytes" : "0x02f88701808477359400a100ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff82520894095e7baea6a6c7c4c2dfeb977efac326af552d878080c080a05cbd172231fc0735e0fb994dd5b1a4939170a260b36f0427a8a80866b063b948a07c230f7f578dd61785c93361b9871c0706ebfa6d06e3f4491dc9558c5202ed36"
+    }
+}

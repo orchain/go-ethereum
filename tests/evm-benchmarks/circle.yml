@@ -1,0 +1,36 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@1
+
+jobs:
+  test:
+    executor: python/default
+    resource_class: small
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Test evmbench.py
+          command: python evmbench_test.py
+      - run:
+          name: Download retesteth
+          command: make bin/retesteth
+      - run:
+          name: Download geth/evm
+          command: make bin/evm
+      - run:
+          name: Clean
+          command: make clean
+      - run:
+          name: Build benchmarks
+          command: make
+      - run:
+          name: Compare benchmarks
+          command: git diff --exit-code benchmarks/
+
+workflows:
+  all:
+    jobs:
+      - test

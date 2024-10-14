@@ -1,0 +1,74 @@
+{
+    "Vitalik_4" : {
+        "_info" : {
+            "comment" : "",
+            "filling-rpc-server" : "evm version 1.11.4-unstable-564db9a9-20230310",
+            "filling-tool-version" : "retesteth-0.3.0-shanghai+commit.324bcf39.Linux.g++",
+            "generatedTestHash" : "a2909e1f0faa9a12489b5591b1ad683a92b0e25a66d29964389fa6f3d91b8dcb",
+            "lllcversion" : "Version: 0.5.14-develop.2022.7.30+commit.a096d7a9.Linux.g++",
+            "solidity" : "Version: 0.8.17+commit.8df45f5f.Linux.g++",
+            "source" : "src/TransactionTestsFiller/ttSignature/Vitalik_4Filler.json",
+            "sourceHash" : "1f79efa0a50c515896a87cd6ce2cd5108ffacad4276910d9488c40c644eb0927"
+        },
+        "result" : {
+            "Berlin" : {
+                "hash" : "0x99b6455776b1988840d0074c23772cb6b323eb32c5011e4a3a1d06d27b2eb425",
+                "intrinsicGas" : "0x5208",
+                "sender" : "0x82a88539669a3fd524d669e858935de5e5410cf0"
+            },
+            "Byzantium" : {
+                "hash" : "0x99b6455776b1988840d0074c23772cb6b323eb32c5011e4a3a1d06d27b2eb425",
+                "intrinsicGas" : "0x5208",
+                "sender" : "0x82a88539669a3fd524d669e858935de5e5410cf0"
+            },
+            "Constantinople" : {
+                "hash" : "0x99b6455776b1988840d0074c23772cb6b323eb32c5011e4a3a1d06d27b2eb425",
+                "intrinsicGas" : "0x5208",
+                "sender" : "0x82a88539669a3fd524d669e858935de5e5410cf0"
+            },
+            "ConstantinopleFix" : {
+                "hash" : "0x99b6455776b1988840d0074c23772cb6b323eb32c5011e4a3a1d06d27b2eb425",
+                "intrinsicGas" : "0x5208",
+                "sender" : "0x82a88539669a3fd524d669e858935de5e5410cf0"
+            },
+            "EIP150" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP158" : {
+                "hash" : "0x99b6455776b1988840d0074c23772cb6b323eb32c5011e4a3a1d06d27b2eb425",
+                "intrinsicGas" : "0x5208",
+                "sender" : "0x82a88539669a3fd524d669e858935de5e5410cf0"
+            },
+            "Frontier" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "Homestead" : {
+                "exception" : "InvalidVRS",
+                "intrinsicGas" : "0x00"
+            },
+            "Istanbul" : {
+                "hash" : "0x99b6455776b1988840d0074c23772cb6b323eb32c5011e4a3a1d06d27b2eb425",
+                "intrinsicGas" : "0x5208",
+                "sender" : "0x82a88539669a3fd524d669e858935de5e5410cf0"
+            },
+            "London" : {
+                "hash" : "0x99b6455776b1988840d0074c23772cb6b323eb32c5011e4a3a1d06d27b2eb425",
+                "intrinsicGas" : "0x5208",
+                "sender" : "0x82a88539669a3fd524d669e858935de5e5410cf0"
+            },
+            "Merge" : {
+                "hash" : "0x99b6455776b1988840d0074c23772cb6b323eb32c5011e4a3a1d06d27b2eb425",
+                "intrinsicGas" : "0x5208",
+                "sender" : "0x82a88539669a3fd524d669e858935de5e5410cf0"
+            },
+            "Shanghai" : {
+                "hash" : "0x99b6455776b1988840d0074c23772cb6b323eb32c5011e4a3a1d06d27b2eb425",
+                "intrinsicGas" : "0x5208",
+                "sender" : "0x82a88539669a3fd524d669e858935de5e5410cf0"
+            }
+        },
+        "txbytes" : "0xf865038504a817c803830148209435353535353535353535353535353535353535351b8025a02a80e1ef1d7842f27f2e6be0972bb708b9a135c38860dbe73c27c3486c34f4e0a02a80e1ef1d7842f27f2e6be0972bb708b9a135c38860dbe73c27c3486c34f4de"
+    }
+}

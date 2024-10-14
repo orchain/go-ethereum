@@ -1,0 +1,65 @@
+{
+    "RLPArrayLengthWithFirstZeros" : {
+        "_info" : {
+            "comment" : "",
+            "filling-rpc-server" : "evm version 1.11.4-unstable-564db9a9-20230310",
+            "filling-tool-version" : "retesteth-0.3.0-shanghai+commit.324bcf39.Linux.g++",
+            "generatedTestHash" : "87f719159195f628748fa5c423728656f2f87cc914a9745c7a449906682aedbf",
+            "lllcversion" : "Version: 0.5.14-develop.2022.7.30+commit.a096d7a9.Linux.g++",
+            "solidity" : "Version: 0.8.17+commit.8df45f5f.Linux.g++",
+            "source" : "src/TransactionTestsFiller/ttWrongRLP/RLPArrayLengthWithFirstZerosCopier.json",
+            "sourceHash" : "d825cdae637f3b44c2237b58ee4279ea00350fa24e2ca169412a40a6ee6673a9"
+        },
+        "result" : {
+            "Berlin" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "Byzantium" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "Constantinople" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "ConstantinopleFix" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP150" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP158" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "Frontier" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "Homestead" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "Istanbul" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "London" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "Merge" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            },
+            "Shanghai" : {
+                "exception" : "LeadingZerosDataSize",
+                "intrinsicGas" : "0x00"
+            }
+        },
+        "txbytes" : "0xf8a20301830186a094b94f5374fce5edbc8e2a8697c15331677e6ebf0b0ab90040ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1ca098ff921201554726367d2be8c804a7ff89ccf285ebc57dff8ae4c44b9c19ac4aa08887321be575c8095f789dd4c743dfe42c1820f9231f98a962b210e3ac2452a3"
+    }
+}

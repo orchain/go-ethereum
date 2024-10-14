@@ -1,0 +1,65 @@
+{
+    "aMaliciousRLP" : {
+        "_info" : {
+            "comment" : "",
+            "filling-rpc-server" : "evm version 1.11.4-unstable-564db9a9-20230310",
+            "filling-tool-version" : "retesteth-0.3.0-shanghai+commit.324bcf39.Linux.g++",
+            "generatedTestHash" : "dde3a11959d8bb4c1f632bad12875af67f27eaeb4ba828edd832842923c77808",
+            "lllcversion" : "Version: 0.5.14-develop.2022.7.30+commit.a096d7a9.Linux.g++",
+            "solidity" : "Version: 0.8.17+commit.8df45f5f.Linux.g++",
+            "source" : "src/TransactionTestsFiller/ttWrongRLP/aMaliciousRLPCopier.json",
+            "sourceHash" : "60be34c1296039515ad73bb23c2dab832b871535c348afe07f3bbdd6ed6b359a"
+        },
+        "result" : {
+            "Berlin" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "Byzantium" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "Constantinople" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "ConstantinopleFix" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP150" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP158" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "Frontier" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "Homestead" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "Istanbul" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "London" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "Merge" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            },
+            "Shanghai" : {
+                "exception" : "RLP_Error_EOF",
+                "intrinsicGas" : "0x00"
+            }
+        },
+        "txbytes" : "0xb8"
+    }
+}

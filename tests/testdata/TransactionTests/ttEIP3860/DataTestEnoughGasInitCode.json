@@ -1,0 +1,77 @@
+{
+    "DataTestEnoughGasInitCode" : {
+        "_info" : {
+            "comment" : "",
+            "filling-rpc-server" : "evm version 1.11.4-unstable-564db9a9-20230310",
+            "filling-tool-version" : "retesteth-0.3.0-shanghai+commit.324bcf39.Linux.g++",
+            "generatedTestHash" : "881129f37a1cfeddcd5674c7b1fb876efff0709cf5934843030080910250b415",
+            "lllcversion" : "Version: 0.5.14-develop.2022.7.30+commit.a096d7a9.Linux.g++",
+            "solidity" : "Version: 0.8.17+commit.8df45f5f.Linux.g++",
+            "source" : "src/TransactionTestsFiller/ttEIP3860/DataTestEnoughGasInitCodeFiller.yml",
+            "sourceHash" : "24b21c219729f19eec091dad925ee7e239919c9f12497af01bf48ccf320651cd"
+        },
+        "result" : {
+            "Berlin" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd008",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "Byzantium" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd008",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "Constantinople" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd008",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "ConstantinopleFix" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd008",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "EIP150" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd008",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "EIP158" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd008",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "Frontier" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0x5308",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "Homestead" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd008",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "Istanbul" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd008",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "London" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd008",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "Merge" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd008",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            },
+            "Shanghai" : {
+                "hash" : "0x8968e3a4186bf5edf31a2506b42d0ae47478fe5f44fb591b121ac08ec173f816",
+                "intrinsicGas" : "0xd00c",
+                "sender" : "0xce520dd42b637d431c53409a24801eb14ae8e423"
+            }
+        },
+        "txbytes" : "0xf88c800a82d00c8080b840000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001ba048b55bfa915ac795c431978d8a6a992b628d557da5ff759b307d495a36649353a01fffd310ac743f371de3b9f7f9cb56c0b28ad43601b4ab949f53faa07bd2c804"
+    }
+}

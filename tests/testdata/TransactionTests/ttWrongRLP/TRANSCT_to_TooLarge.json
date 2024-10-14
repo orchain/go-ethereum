@@ -1,0 +1,65 @@
+{
+    "TRANSCT_to_TooLarge" : {
+        "_info" : {
+            "comment" : "",
+            "filling-rpc-server" : "evm version 1.11.4-unstable-564db9a9-20230310",
+            "filling-tool-version" : "retesteth-0.3.0-shanghai+commit.324bcf39.Linux.g++",
+            "generatedTestHash" : "6611e5f46935894658e1affd57e25149685e9b3af4910c8481624f4d3a8f1810",
+            "lllcversion" : "Version: 0.5.14-develop.2022.7.30+commit.a096d7a9.Linux.g++",
+            "solidity" : "Version: 0.8.17+commit.8df45f5f.Linux.g++",
+            "source" : "src/TransactionTestsFiller/ttWrongRLP/TRANSCT_to_TooLargeCopier.json",
+            "sourceHash" : "50738ac83e682f9e738e0a357992d2e3d1150d1218f247146abbddca7e25b26c"
+        },
+        "result" : {
+            "Berlin" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "Byzantium" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "Constantinople" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "ConstantinopleFix" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP150" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "EIP158" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "Frontier" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "Homestead" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "Istanbul" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "London" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "Merge" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            },
+            "Shanghai" : {
+                "exception" : "AddressTooLong",
+                "intrinsicGas" : "0x00"
+            }
+        },
+        "txbytes" : "0xf86303018207d096ef3db94f5374fce5edbc8e2a8697c15331677e6ebf0b0a8255441ca098ff921201554726367d2be8c804a7ff89ccf285ebc57dff8ae4c44b9c19ac4aa08887321be575c8095f789dd4c743dfe42c1820f9231f98a962b210e3ac2452a3"
+    }
+}

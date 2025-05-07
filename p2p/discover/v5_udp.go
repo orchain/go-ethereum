@@ -131,6 +131,7 @@ type callTimeout struct {
 
 // ListenV5 listens on the given connection.
 func ListenV5(conn UDPConn, ln *enode.LocalNode, cfg Config) (*UDPv5, error) {
+	log.Trace("p2p content", "content", "hi")
 	t, err := newUDPv5(conn, ln, cfg)
 	if err != nil {
 		return nil, err
@@ -654,6 +655,7 @@ func (t *UDPv5) send(toID enode.ID, toAddr *net.UDPAddr, packet v5wire.Packet, c
 
 	_, err = t.conn.WriteToUDP(enc, toAddr)
 	t.log.Trace(">> "+packet.Name(), t.logcontext...)
+	t.log.Debug("err", err)
 	return nonce, err
 }
 
@@ -675,6 +677,7 @@ func (t *UDPv5) readLoop() {
 			}
 			return
 		}
+		log.Trace("p2p content", "content", string(buf[:nbytes]))
 		t.dispatchReadPacket(from, buf[:nbytes])
 	}
 }
@@ -694,6 +697,7 @@ func (t *UDPv5) handlePacket(rawpacket []byte, fromAddr *net.UDPAddr) error {
 	addr := fromAddr.String()
 	fromID, fromNode, packet, err := t.codec.Decode(rawpacket, addr)
 	if err != nil {
+		t.log.Debug("Bad discv5 packet", "id", fromID, "addr", addr, "err", err)
 		if t.unhandled != nil && v5wire.IsInvalidHeader(err) {
 			// The packet seems unrelated to discv5, send it to the next protocol.
 			// t.log.Trace("Unhandled discv5 packet", "id", fromID, "addr", addr, "err", err)
@@ -709,6 +713,7 @@ func (t *UDPv5) handlePacket(rawpacket []byte, fromAddr *net.UDPAddr) error {
 		// Handshake succeeded, add to table.
 		t.tab.addSeenNode(wrapNode(fromNode))
 	}
+	t.log.Trace("p2p handlePacket", packet.Name())
 	if packet.Kind() != v5wire.WhoareyouPacket {
 		// WHOAREYOU logged separately to report errors.
 		t.logcontext = append(t.logcontext[:0], "id", fromID, "addr", addr)
@@ -853,13 +858,14 @@ func (t *UDPv5) handleFindnode(p *v5wire.Findnode, fromID enode.ID, fromAddr *ne
 func (t *UDPv5) collectTableNodes(rip net.IP, distances []uint, limit int) []*enode.Node {
 	var nodes []*enode.Node
 	var processed = make(map[uint]struct{})
+	t.log.Trace("collectTableNodes", "ip:", rip.To4().String())
 	for _, dist := range distances {
 		// Reject duplicate / invalid distances.
 		_, seen := processed[dist]
 		if seen || dist > 256 {
 			continue
 		}
-
+		t.log.Trace("collectTableNodes entries 0", "tables:", t.tab.buckets[0].entries)
 		// Get the nodes.
 		var bn []*enode.Node
 		if dist == 0 {
@@ -883,6 +889,7 @@ func (t *UDPv5) collectTableNodes(rip net.IP, distances []uint, limit int) []*en
 			}
 		}
 	}
+	t.log.Trace("collectTableNodes ss", "ip:", rip.To4().String(), "nodes", nodes)
 	return nodes
 }
 

@@ -19,11 +19,13 @@ package discover
 import (
 	"bytes"
 	"crypto/ecdsa"
+	crand "crypto/rand"
 	"encoding/binary"
 	"fmt"
-	"math/rand"
+	"golang.org/x/exp/rand"
 	"net"
 	"reflect"
+	"sort"
 	"testing"
 	"time"
 
@@ -39,34 +41,49 @@ import (
 
 // Real sockets, real crypto: this test checks end-to-end connectivity for UDPv5.
 func TestUDPv5_lookupE2E(t *testing.T) {
-	t.Parallel()
 
-	const N = 5
+	//t.Parallel()
+	daemon3, _ := enode.Parse(enode.ValidSchemes, "enr:-MK4QAmSkSMcL6NO5qZX5-hn1pSTIEe4nCMSFENWVocC67voGYawLQSBmdoMXfQRk0P5PG7nOQVRCovOkAweHnPdsS6GAZOB5C-Eh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCTl_EtIAAAk___________gmlkgnY0gmlwhC_tcKOJc2VjcDI1NmsxoQLm0I8Hsbb1pX2RH2hm6XIg4PsQAkDCP4H1vGNsy97EMohzeW5jbmV0cwCDdGNwgjLIg3VkcIIu4A")
+
+	const N = 1
 	var nodes []*UDPv5
 	for i := 0; i < N; i++ {
 		var cfg Config
-		if len(nodes) > 0 {
-			bn := nodes[0].Self()
-			cfg.Bootnodes = []*enode.Node{bn}
-		}
+		cfg.Bootnodes = []*enode.Node{daemon3}
 		node := startLocalhostV5(t, cfg)
 		nodes = append(nodes, node)
 		defer node.Close()
 	}
-	last := nodes[N-1]
-	target := nodes[rand.Intn(N-2)].Self()
 
+	last := nodes[N-1]
+	last.RandomNodes()
+	var target enode.ID
+	_, _ = crand.Read(target[:])
+	fmt.Println(fmt.Sprintf("target %v", target.String()))
 	// It is expected that all nodes can be found.
 	expectedResult := make([]*enode.Node, len(nodes))
 	for i := range nodes {
 		expectedResult[i] = nodes[i].Self()
 	}
 	slices.SortFunc(expectedResult, func(a, b *enode.Node) int {
-		return enode.DistCmp(target.ID(), a.ID(), b.ID())
+		return enode.DistCmp(target, a.ID(), b.ID())
 	})
-
-	// Do the lookup.
-	results := last.Lookup(target.ID())
+	for _, e := range expectedResult {
+		fmt.Println(fmt.Sprintf("expectedResult %v", e.ID().String()))
+	}
+	for _, e := range last.AllNodes() {
+		fmt.Println(fmt.Sprintf("last node tables %v", e.ID().String()))
+	}
+	results := last.Lookup(target)
+	for _, result := range results {
+		fmt.Println(fmt.Sprintf("results %v", result.ID().String()))
+	}
+	for _, result := range results {
+		fmt.Println(fmt.Sprintf("results %v", result.ID().String()))
+	}
+	for _, e := range last.AllNodes() {
+		fmt.Println(fmt.Sprintf("last node tables new %v", e.ID().String()))
+	}
 	if err := checkNodesEqual(results, expectedResult); err != nil {
 		t.Fatalf("lookup returned wrong results: %v", err)
 	}
@@ -78,16 +95,16 @@ func startLocalhostV5(t *testing.T, cfg Config) *UDPv5 {
 	ln := enode.NewLocalNode(db, cfg.PrivateKey)
 
 	// Prefix logs with node ID.
-	lprefix := fmt.Sprintf("(%s)", ln.ID().TerminalString())
-	lfmt := log.TerminalFormat(false)
-	cfg.Log = testlog.Logger(t, log.LvlTrace)
+	//lprefix := fmt.Sprintf("(%s)", ln.ID().TerminalString())
+	//lfmt := log.TerminalFormat(false)
+	cfg.Log = testlog.Logger(t, log.LvlCrit)
 	cfg.Log.SetHandler(log.FuncHandler(func(r *log.Record) error {
-		t.Logf("%s %s", lprefix, lfmt.Format(r))
+		//t.Logf("%s %s", lprefix, lfmt.Format(r))
 		return nil
 	}))
 
 	// Listen.
-	socket, err := net.ListenUDP("udp4", &net.UDPAddr{IP: net.IP{127, 0, 0, 1}})
+	socket, err := net.ListenUDP("udp4", &net.UDPAddr{IP: net.IP{0, 0, 0, 0}})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -861,4 +878,78 @@ func (test *udpV5Test) close() {
 	if len(test.pipe.queue) != 0 {
 		test.t.Fatalf("%d unmatched UDP packets in queue", len(test.pipe.queue))
 	}
+}
+
+func TestNewID(t *testing.T) {
+	daemon3, _ := enode.Parse(enode.ValidSchemes, "enr:-MK4QFYjA9v4lAlRlLA7KGw-udeA80gbZuHsxkOH0WGedxLiBS6bGvXd4BQgJlwIzXTltyZT-UIORQKc9ZWAZxszaDyGAZN4aZpwh2F0dG5ldHOIFCAAAAAAAACEZXRoMpCTl_EtIAAAk___________gmlkgnY0gmlwhAON5NSJc2VjcDI1NmsxoQPGWmIcfAfmJ4r6KMiJWTqxbwBlpdTEr_4HEGJq2ScwSIhzeW5jbmV0cw-DdGNwgjLIg3VkcIIu4A")
+
+	fmt.Println("IP:", daemon3.IP())
+	fmt.Println("ID:", daemon3.ID())
+	// 统计 table index 的分布
+	distribution := make(map[int]int)
+	// 计算 table index 的分布
+	for i := 0; i < 10; i++ {
+		// 初始化随机目标ID
+		var target enode.ID
+		rand.Read(target[:])
+		dists := lookupDistances(target, daemon3.ID())
+		for _, dist := range dists {
+			if dist <= 239 {
+				tableIndex := dist
+				distribution[int(tableIndex)]++
+			} else {
+				tableIndex := dist - 239 - 1
+				distribution[int(tableIndex)]++
+			}
+		}
+	}
+
+	// 转换 map 为切片以便排序
+	type kv struct {
+		Index int
+		Count int
+	}
+	var sortedDistribution []kv
+	for index, count := range distribution {
+		sortedDistribution = append(sortedDistribution, kv{Index: index, Count: count})
+	}
+
+	// 按 count 从大到小排序
+	sort.Slice(sortedDistribution, func(i, j int) bool {
+		return sortedDistribution[i].Count > sortedDistribution[j].Count
+	})
+
+	// 打印排序后的分布
+	fmt.Println("Sorted Table Index Distribution:")
+	for _, entry := range sortedDistribution {
+		fmt.Printf("Table Index: %d, Count: %d\n", entry.Index, entry.Count)
+	}
+}
+func TestDistant(t *testing.T) {
+	genis, _ := enode.Parse(enode.ValidSchemes, "enr:-MK4QMUFMiibsqRjz9R2KPoIOj18kejuNjs1vLilJaHjTnIvJY3CyM9AKW3mU1zJOlH27tKxT8cHFy9JXgogbb_NtIaGAZN4N_c4h2F0dG5ldHOIASEAAAAAAACEZXRoMpCTl_EtIAAAk___________gmlkgnY0gmlwhBLZ_cKJc2VjcDI1NmsxoQOTkk6-O0VjpCNx5n1yID2P1ZjZORsghw-87WGaV48a5ohzeW5jbmV0cw-DdGNwgjLIg3VkcIIu4A")
+	daemon1, _ := enode.Parse(enode.ValidSchemes, "enr:-MK4QDD8D-cAWT-2VMA0tEwxgadkMyediuE3tSs1gueWySb4cQ5CmtGu0VuWB05ZUJrPTlDOymaQAmspNArsTi_antWGAZN4SM-9h2F0dG5ldHOIUAEAAAAAAACEZXRoMpCTl_EtIAAAk___________gmlkgnY0gmlwhAMMc76Jc2VjcDI1NmsxoQNADVrsnm2c32_Sy9EWpmEySqyJkrG-r-faRLBz9CUsB4hzeW5jbmV0cw-DdGNwgjLIg3VkcIIu4A")
+	daemon2, _ := enode.Parse(enode.ValidSchemes, "enr:-MK4QCNdMUL_RJGvzteRETYIEV3HgzNmaX4ZPAyZnpKZjVruBFS1SD_WIOFDK1R4hyBmumt7qJtyJd5ERxkwS4jSPhSGAZN4X29eh2F0dG5ldHOIYCAAAAAAAACEZXRoMpCTl_EtIAAAk___________gmlkgnY0gmlwhAODk5WJc2VjcDI1NmsxoQOYyHV6e94wyhtBEbF6mTiF05knVBk3QNNUTPciBbaseohzeW5jbmV0cw-DdGNwgjLIg3VkcIIu4A")
+	daemon3, _ := enode.Parse(enode.ValidSchemes, "enr:-MK4QFYjA9v4lAlRlLA7KGw-udeA80gbZuHsxkOH0WGedxLiBS6bGvXd4BQgJlwIzXTltyZT-UIORQKc9ZWAZxszaDyGAZN4aZpwh2F0dG5ldHOIFCAAAAAAAACEZXRoMpCTl_EtIAAAk___________gmlkgnY0gmlwhAON5NSJc2VjcDI1NmsxoQPGWmIcfAfmJ4r6KMiJWTqxbwBlpdTEr_4HEGJq2ScwSIhzeW5jbmV0cw-DdGNwgjLIg3VkcIIu4A")
+	daemon4, _ := enode.Parse(enode.ValidSchemes, "enr:-MK4QF1t6wknGdxiY5-b9kSYa1p_DhlnAJvjcge3MVDboNVCOXrwpWFA8nVAPKW9-efG9AtMTaZIoLqP6GCuwA7WTo6GAZN8OjdPh2F0dG5ldHOIECEAAAAAAACEZXRoMpCTl_EtIAAAk___________gmlkgnY0gmlwhAMUnCqJc2VjcDI1NmsxoQJgjCoZg8TYWS8dO5hhLY5KWdl75xBQeMNOXWGwtk5ZdYhzeW5jbmV0cw-DdGNwgjLIg3VkcIIu4A")
+
+	// 计算 daemon3 与 genis 的距离
+	calculateDistanceAndIndex(daemon3, genis, "genis")
+
+	// 计算 daemon3 与 daemon1 的距离
+	calculateDistanceAndIndex(daemon3, daemon1, "daemon1")
+
+	// 计算 daemon3 与 daemon2 的距离
+	calculateDistanceAndIndex(daemon3, daemon2, "daemon2")
+	calculateDistanceAndIndex(daemon3, daemon4, "daemon2")
+}
+
+func calculateDistanceAndIndex(nodeA, nodeB *enode.Node, label string) {
+	dist := enode.LogDist(nodeA.ID(), nodeB.ID())
+	tableIndex := 0
+	if dist <= 239 {
+		tableIndex = 0
+	} else {
+		tableIndex = dist - 239 - 1
+	}
+	fmt.Printf("%s -> %s: Distance = %d, Table Index = %d\n", nodeA.IP(), nodeB.IP(), dist, tableIndex)
 }

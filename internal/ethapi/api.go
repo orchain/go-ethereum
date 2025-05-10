@@ -492,7 +492,7 @@ func (s *PersonalAccountAPI) SignTransaction(ctx context.Context, args Transacti
 	}
 	// Before actually signing the transaction, ensure the transaction fee is reasonable.
 	tx := args.toTransaction()
-	if err := checkTxFee(tx.GasPrice(), tx.Gas(), s.b.RPCTxFeeCap()); err != nil {
+	if err := checkNewTxFee(tx.GasPrice(), tx.Gas(), s.b.RPCTxFeeCap()); err != nil {
 		return nil, err
 	}
 	signed, err := s.signTransaction(ctx, &args, passwd)
@@ -1863,11 +1863,11 @@ func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (c
 	// fee of the given transaction is _reasonable_.
 	head := b.CurrentBlock()
 	if head.Number.Int64() > params.NewBaseFeeBlockHeight {
-		if err := checkTxFee(tx.GasPrice(), tx.Gas(), b.RPCTxFeeCap()); err != nil {
+		if err := checkNewTxFee(tx.GasPrice(), tx.Gas(), b.RPCTxFeeCap()); err != nil {
 			return common.Hash{}, err
 		}
 	} else {
-		if err := checkTxFeeOld(tx.GasPrice(), tx.Gas(), b.RPCTxFeeCap()); err != nil {
+		if err := checkTxFee(tx.GasPrice(), tx.Gas(), b.RPCTxFeeCap()); err != nil {
 			return common.Hash{}, err
 		}
 	}
@@ -2004,7 +2004,7 @@ func (s *TransactionAPI) SignTransaction(ctx context.Context, args TransactionAr
 	}
 	// Before actually sign the transaction, ensure the transaction fee is reasonable.
 	tx := args.toTransaction()
-	if err := checkTxFee(tx.GasPrice(), tx.Gas(), s.b.RPCTxFeeCap()); err != nil {
+	if err := checkNewTxFee(tx.GasPrice(), tx.Gas(), s.b.RPCTxFeeCap()); err != nil {
 		return nil, err
 	}
 	signed, err := s.sign(args.from(), tx)
@@ -2062,7 +2062,7 @@ func (s *TransactionAPI) Resend(ctx context.Context, sendArgs TransactionArgs, g
 	if gasLimit != nil {
 		gas = uint64(*gasLimit)
 	}
-	if err := checkTxFee(price, gas, s.b.RPCTxFeeCap()); err != nil {
+	if err := checkNewTxFee(price, gas, s.b.RPCTxFeeCap()); err != nil {
 		return common.Hash{}, err
 	}
 	// Iterate the pending list for replacement
@@ -2272,7 +2272,7 @@ func checkTxFee(gasPrice *big.Int, gas uint64, cap float64) error {
 
 // checkTxFee is an internal function used to check whether the fee of
 // the given transaction is _reasonable_(under the cap).
-func checkTxFeeOld(gasPrice *big.Int, gas uint64, cap float64) error {
+func checkNewTxFee(gasPrice *big.Int, gas uint64, cap float64) error {
 	// Short circuit if there is no cap for transaction fee at all.
 	if cap == 0 {
 		return nil
@@ -2282,8 +2282,8 @@ func checkTxFeeOld(gasPrice *big.Int, gas uint64, cap float64) error {
 	if feeFloat > cap {
 		return fmt.Errorf("tx fee (%.2f ether) exceeds the configured cap (%.2f ether)", feeFloat, cap)
 	}
-	if big.NewInt(params.MinBaseFeeOld).Cmp(gasPrice) > 0 {
-		return fmt.Errorf("min gas price %v gwei", params.MinBaseFeeOld/params.GWei)
+	if big.NewInt(params.NewMinBaseFee).Cmp(gasPrice) > 0 {
+		return fmt.Errorf("min gas price %v gwei", params.NewMinBaseFee/params.GWei)
 	}
 	return nil
 }

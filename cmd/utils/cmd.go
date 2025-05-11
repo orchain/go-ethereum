@@ -73,6 +73,7 @@ func StartNode(ctx *cli.Context, stack *node.Node, isConsole bool) {
 		Fatalf("Error starting protocol stack: %v", err)
 	}
 	go func() {
+		log.Info("Got start")
 		sigc := make(chan os.Signal, 1)
 		signal.Notify(sigc, syscall.SIGINT, syscall.SIGTERM)
 		defer signal.Stop(sigc)
@@ -111,7 +112,9 @@ func StartNode(ctx *cli.Context, stack *node.Node, isConsole bool) {
 				}
 			}
 		} else {
+			log.Info("Got shutdown 1")
 			<-sigc
+			log.Info("Got shutdown 2")
 			shutdown()
 		}
 	}()

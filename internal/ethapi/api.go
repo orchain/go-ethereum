@@ -67,6 +67,7 @@ func (s *EthereumAPI) GasPrice(ctx context.Context) (*hexutil.Big, error) {
 		return nil, err
 	}
 	if head := s.b.CurrentHeader(); head.BaseFee != nil {
+		log.Debug(fmt.Sprintf("tipcap %v, head %v", tipcap.String(), head.BaseFee))
 		tipcap.Add(tipcap, head.BaseFee)
 	}
 	return (*hexutil.Big)(tipcap), err

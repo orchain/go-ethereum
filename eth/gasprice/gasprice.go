@@ -18,6 +18,7 @@ package gasprice
 
 import (
 	"context"
+	"fmt"
 	"math/big"
 	"sync"
 
@@ -258,6 +259,7 @@ func (oracle *Oracle) getBlockValues(ctx context.Context, blockNum uint64, limit
 	var prices []*big.Int
 	for _, tx := range sortedTxs {
 		tip, _ := tx.EffectiveGasTip(baseFee)
+		log.Info(fmt.Sprintf("tip %v, baseFee %v, tran %v", tip, baseFee, tx.Hash().String()))
 		if ignoreUnder != nil && tip.Cmp(ignoreUnder) == -1 {
 			continue
 		}

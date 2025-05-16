@@ -166,6 +166,8 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 	oracle.cacheLock.RLock()
 	lastHead, lastPrice = oracle.lastHead, oracle.lastPrice
 	oracle.cacheLock.RUnlock()
+	log.Info(fmt.Sprintf("lastHead %v, lastPrice %v", lastHead.String(), lastPrice))
+
 	if headHash == lastHead {
 		return new(big.Int).Set(lastPrice), nil
 	}

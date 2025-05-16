@@ -1872,6 +1872,7 @@ func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (c
 			return common.Hash{}, err
 		}
 	}
+	log.Info(fmt.Sprintf("GasTipCap %v, GasFeeCap %v, GasPrice %v", tx.GasTipCap(), tx.GasFeeCap(), tx.GasPrice()))
 
 	if !b.UnprotectedAllowed() && !tx.Protected() {
 		// Ensure only eip155 signed transactions are submitted if EIP155Required is set.

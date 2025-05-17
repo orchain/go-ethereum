@@ -223,7 +223,7 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 	oracle.lastHead = headHash
 	oracle.lastPrice = price
 	oracle.cacheLock.Unlock()
-	log.Debug(fmt.Sprintf("price %v, head number %v", price.String(), head.Number.String()))
+	log.Debug(fmt.Sprintf("price %v, head number %v, head baseFee %v", price.String(), head.Number.String(), head.BaseFee.String()))
 	return new(big.Int).Set(price), nil
 }
 

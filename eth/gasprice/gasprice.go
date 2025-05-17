@@ -181,6 +181,7 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 		exp++
 		number--
 	}
+	noFindHistoryTrans := true
 	for exp > 0 {
 		res := <-result
 		if res.err != nil {
@@ -192,12 +193,12 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 		// - The block is empty
 		// - All the transactions included are sent by the miner itself.
 		// In these cases, use the latest calculated price for sampling.
-		if head.Number.Cmp(big.NewInt(params.NewBaseFeeBlockHeight)) > 0 {
-			lastPrice = big.NewInt(0)
-		}
 		if len(res.values) == 0 {
 			res.values = []*big.Int{lastPrice}
+		} else {
+			noFindHistoryTrans = false
 		}
+
 		// Besides, in order to collect enough data for sampling, if nothing
 		// meaningful returned, try to query more blocks. But the maximum
 		// is 2*checkBlocks.
@@ -216,6 +217,9 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 	}
 	if price.Cmp(oracle.maxPrice) > 0 {
 		price = new(big.Int).Set(oracle.maxPrice)
+	}
+	if head.Number.Cmp(big.NewInt(params.NewBaseFeeBlockHeight)) > 0 && !noFindHistoryTrans {
+		price = big.NewInt(0)
 	}
 	oracle.cacheLock.Lock()
 	oracle.lastHead = headHash

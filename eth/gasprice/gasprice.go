@@ -181,7 +181,7 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 		exp++
 		number--
 	}
-	noFindHistoryTrans := true
+	findOne := false
 	for exp > 0 {
 		res := <-result
 		if res.err != nil {
@@ -196,7 +196,7 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 		if len(res.values) == 0 {
 			res.values = []*big.Int{lastPrice}
 		} else {
-			noFindHistoryTrans = false
+			findOne = true
 		}
 
 		// Besides, in order to collect enough data for sampling, if nothing
@@ -218,7 +218,7 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 	if price.Cmp(oracle.maxPrice) > 0 {
 		price = new(big.Int).Set(oracle.maxPrice)
 	}
-	if head.Number.Cmp(big.NewInt(params.NewBaseFeeBlockHeight)) > 0 && !noFindHistoryTrans {
+	if head.Number.Cmp(big.NewInt(params.NewBaseFeeBlockHeight)) > 0 && !findOne {
 		price = big.NewInt(0)
 	}
 	oracle.cacheLock.Lock()

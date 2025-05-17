@@ -211,12 +211,12 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 	price := lastPrice
 	if head.Number.Cmp(big.NewInt(params.NewBaseFeeBlockHeight)) > 0 {
 		price = big.NewInt(0)
-		log.Debug(fmt.Sprintf("price %v, head number %v, head baseFee %v", price.String(), head.Number.String(), head.BaseFee.String()))
+		log.Debug(fmt.Sprintf("price1 %v, head number %v, head baseFee %v", price.String(), head.Number.String(), head.BaseFee.String()))
 	}
 	if len(results) > 0 {
 		slices.SortFunc(results, func(a, b *big.Int) int { return a.Cmp(b) })
 		price = results[(len(results)-1)*oracle.percentile/100]
-		log.Debug(fmt.Sprintf("price %v", price))
+		log.Debug(fmt.Sprintf("price2 %v", price))
 	}
 	if price.Cmp(oracle.maxPrice) > 0 {
 		price = new(big.Int).Set(oracle.maxPrice)
@@ -225,7 +225,7 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 	oracle.lastHead = headHash
 	oracle.lastPrice = price
 	oracle.cacheLock.Unlock()
-	log.Debug(fmt.Sprintf("price %v, head number %v, head baseFee %v", price.String(), head.Number.String(), head.BaseFee.String()))
+	log.Debug(fmt.Sprintf("price3 %v, head number %v, head baseFee %v", price.String(), head.Number.String(), head.BaseFee.String()))
 	return new(big.Int).Set(price), nil
 }
 

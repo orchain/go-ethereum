@@ -211,10 +211,12 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 	price := lastPrice
 	if head.Number.Cmp(big.NewInt(params.NewBaseFeeBlockHeight)) > 0 {
 		price = big.NewInt(0)
+		log.Debug(fmt.Sprintf("price %v, head number %v, head baseFee %v", price.String(), head.Number.String(), head.BaseFee.String()))
 	}
 	if len(results) > 0 {
 		slices.SortFunc(results, func(a, b *big.Int) int { return a.Cmp(b) })
 		price = results[(len(results)-1)*oracle.percentile/100]
+		log.Debug(fmt.Sprintf("price %v", price))
 	}
 	if price.Cmp(oracle.maxPrice) > 0 {
 		price = new(big.Int).Set(oracle.maxPrice)

@@ -206,7 +206,11 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 		}
 		results = append(results, res.values...)
 	}
+
 	price := lastPrice
+	if head.Number.Cmp(big.NewInt(params.NewBaseFeeBlockHeight)) > 0 {
+		price = big.NewInt(params.NewMinBaseFee)
+	}
 	if len(results) > 0 {
 		slices.SortFunc(results, func(a, b *big.Int) int { return a.Cmp(b) })
 		price = results[(len(results)-1)*oracle.percentile/100]

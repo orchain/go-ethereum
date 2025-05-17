@@ -181,6 +181,7 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 		exp++
 		number--
 	}
+	findOne := false
 	for exp > 0 {
 		res := <-result
 		if res.err != nil {
@@ -194,7 +195,10 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 		// In these cases, use the latest calculated price for sampling.
 		if len(res.values) == 0 {
 			res.values = []*big.Int{lastPrice}
+		} else {
+			findOne = true
 		}
+
 		// Besides, in order to collect enough data for sampling, if nothing
 		// meaningful returned, try to query more blocks. But the maximum
 		// is 2*checkBlocks.
@@ -213,6 +217,9 @@ func (oracle *Oracle) SuggestTipCap(ctx context.Context) (*big.Int, error) {
 	}
 	if price.Cmp(oracle.maxPrice) > 0 {
 		price = new(big.Int).Set(oracle.maxPrice)
+	}
+	if head.Number.Cmp(big.NewInt(params.NewBaseFeeBlockHeight)) > 0 && !findOne {
+		price = big.NewInt(0)
 	}
 	oracle.cacheLock.Lock()
 	oracle.lastHead = headHash

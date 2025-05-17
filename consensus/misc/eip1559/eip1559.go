@@ -71,6 +71,9 @@ func CalcBaseFee(config *params.ChainConfig, parent *types.Header) *big.Int {
 		denom = new(big.Int)
 	)
 	minBaseFee := new(big.Int).SetUint64(params.MinBaseFee)
+	if parent.Number.Int64() > params.NewBaseFeeBlockHeight {
+		minBaseFee = new(big.Int).SetUint64(params.NewMinBaseFee)
+	}
 	if parent.GasUsed > parentGasTarget {
 		// If the parent block used more gas than its target, the baseFee should increase.
 		// max(1, parentBaseFee * gasUsedDelta / parentGasTarget / baseFeeChangeDenominator)

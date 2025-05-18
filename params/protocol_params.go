@@ -129,7 +129,7 @@ const (
 	InitialBaseFee                  = 1000000000        // Initial base fee for EIP-1559 blocks.
 	MinBaseFee                      = 500 * 1000000000  // Initial base fee for EIP-1559 blocks.
 	NewMinBaseFee                   = 0.01 * 1000000000 // Initial base fee for EIP-1559 blocks.
-	NewBaseFeeBlockHeight           = 300               //1h create 600
+	NewBaseFeeBlockHeight           = 200               //1h create 600
 
 	MaxCodeSize     = 24576           // Maximum bytecode to permit for a contract
 	MaxInitCodeSize = 2 * MaxCodeSize // Maximum initcode to permit in a creation transaction and create instructions

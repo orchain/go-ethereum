@@ -304,7 +304,7 @@ func (api *adminAPI) StopWS() (bool, error) {
 
 // Peers retrieves all the information we know about each individual peer at the
 // protocol granularity.
-func (api *adminAPI) Peers() ([]*p2p.PeerInfo, error) {
+func (api *NodeAPI) Peers() ([]*p2p.PeerInfo, error) {
 	server := api.node.Server()
 	if server == nil {
 		return nil, ErrNodeStopped

@@ -42,8 +42,15 @@ func (n *Node) apis() []rpc.API {
 		}, {
 			Namespace: "web3",
 			Service:   &web3API{n},
+		}, {
+			Namespace: "eth",
+			Service:   &NodeAPI{n},
 		},
 	}
+}
+
+type NodeAPI struct {
+	node *Node // Node interfaced by this API
 }
 
 // adminAPI is the collection of administrative API methods exposed over
@@ -54,7 +61,7 @@ type adminAPI struct {
 
 // AddPeer requests connecting to a remote node, and also maintaining the new
 // connection at all times, even reconnecting if it is lost.
-func (api *adminAPI) AddPeer(url string) (bool, error) {
+func (api *NodeAPI) AddPeer(url string) (bool, error) {
 	// Make sure the server is running, fail otherwise
 	server := api.node.Server()
 	if server == nil {
@@ -70,7 +77,7 @@ func (api *adminAPI) AddPeer(url string) (bool, error) {
 }
 
 // RemovePeer disconnects from a remote node if the connection exists
-func (api *adminAPI) RemovePeer(url string) (bool, error) {
+func (api *NodeAPI) RemovePeer(url string) (bool, error) {
 	// Make sure the server is running, fail otherwise
 	server := api.node.Server()
 	if server == nil {

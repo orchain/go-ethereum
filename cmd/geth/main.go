@@ -19,7 +19,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/ethereum/go-ethereum/params"
 	"os"
 	"sort"
 	"strconv"
@@ -273,7 +272,7 @@ func main() {
 // This function should be called before launching devp2p stack.
 func prepare(ctx *cli.Context) {
 	// If we're running a known preset, log it for convenience.
-	log.Info(fmt.Sprintf("Starting Geth on new gas price, new gas %v, block height %v", params.NewMinBaseFee, params.NewBaseFeeBlockHeight))
+	log.Info(fmt.Sprintf("Starting Geth on new node"))
 	switch {
 	case ctx.IsSet(utils.GoerliFlag.Name):
 		log.Info("Starting Geth on Görli testnet...")
